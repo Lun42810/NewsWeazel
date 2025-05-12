@@ -32,4 +32,11 @@ const noticiaSchema = mongoose.Schema({
     imagen: {
         type: String,
         required: true,
-    }});
+    },
+    categoria: {
+        type: mongoose.Schema.Types.ObjectId, //aqui es lo mismo que en el anterior, pero este es el esquema de categoria ok?
+        ref: 'categoria',
+        required: true, 
+    },
+});
+module.exports = mongoose.model("Noticia", noticiaSchema);
