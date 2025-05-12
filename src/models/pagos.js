@@ -18,7 +18,13 @@ const pagoSchema = new mongoose.Schema({
   metodoPago: {
     type: String,
     enum: ['tarjeta', 'paypal', 'efectivo'],
-    required: true
+    required: true,
+    validate: {
+      validator: function(value) {
+        return !(value === 'efectivo' && this.monto > 100000);
+      },
+      message: 'El pago en efectivo no puede superar los $100.000'
+    }
   }
 }, { timestamps: true });
 
@@ -27,5 +33,5 @@ pagoSchema.methods.procesarPago = function() {
   return true;
 };
 
-module.exports = mongoose.model('Pago', pagoSchema);
+module.exports = mongoose.model('Payment', pagoSchema);
 
