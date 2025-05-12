@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  username: {
+  nombreUsuario: {
     type: String,
     required: true,
     unique: true,
@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
     unique: true,
     match: /.+\@.+\..+/
   },
-  password: {
+  contraseña: {
     type: String,
     required: true
   },
-  role: {
+  rol: {
     type: String,
     enum: ['usuario', 'autor', 'editor', 'revisor'],
     default: 'usuario'
