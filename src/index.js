@@ -2,6 +2,8 @@ const parser = require("body-parser");
 const express = require('express');
 const app = express();
 const port = 3000;
+
+const noticiaRoutes = require("./routes/noticia"); 
 const categoriaRoutes = require("./routes/categoria"); 
 const mongoose = require("mongoose");
 require('dotenv').config();
@@ -10,7 +12,7 @@ app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json()); 
 
 
-
+app.use("/api", noticiaRoutes); 
 app.use("/api", categoriaRoutes); 
 
 
