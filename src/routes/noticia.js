@@ -56,3 +56,13 @@ router.put("/noticia/:id", (req, res) => {
         .then((data) => res.json(data)) 
         .catch((error) => res.status(500).json({ message: error.message })); 
 });
+
+// Eliminar una noticia por ID
+router.delete("/noticia/:id", (req, res) => {
+    const { id } = req.params;
+    Noticia.deleteOne({ _id: id }) 
+        .then((data) => res.json(data)) 
+        .catch((error) => res.status(500).json({ message: error.message })); 
+});
+
+module.exports = router; 
