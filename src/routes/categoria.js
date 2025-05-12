@@ -16,17 +16,19 @@ router.get("/categoria", (req, res) => {
         .catch((error) => res.status(500).json({ message: error.message }));
 });
 
-
-router.get("/categoria/:id", (req, res) => {
+router.put("/categoria/:id", (req, res) => {
     const { id } = req.params;
-    categoriaSchema
-        .findById(id)
-        .then((data) => {
-            if (!data) {
-                return res.status(404).json({ message: "Categoria no encontrada" });
-            }
-            res.json(data);
-        })
+    const { nombre } = req.body;
+    categoriaSchema.updateOne({ _id: id }, { $set: { nombre } })
+        .then((data) => res.json(data))
+        .catch((error) => res.status(500).json({ message: error.message }));
+});
+
+
+router.delete("/categoria/:id", (req, res) => {
+    const { id } = req.params;
+    categoriaSchema.deleteOne({ _id: id })
+        .then((data) => res.json(data))
         .catch((error) => res.status(500).json({ message: error.message }));
 });
 module.exports = router;
