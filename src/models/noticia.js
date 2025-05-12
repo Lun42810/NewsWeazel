@@ -5,5 +5,5 @@ const noticiaSchema = mongoose.Schema({
         ref: 'categoria',
         required: true, 
     },
-});
+}, { timestamps: true });
 module.exports = mongoose.model("Noticia", noticiaSchema);
