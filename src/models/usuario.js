@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    match: /.+\@.+\..+/
+    match: /.+@.+\..+/
   },
   contraseña: {
     type: String,
@@ -24,4 +24,15 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+userSchema.methods.actualizarPerfil = function(nuevoNombreUsuario, nuevoEmail) {
+  this.nombreUsuario = nuevoNombreUsuario;
+  this.email = nuevoEmail;
+  return this.save();
+};
+
+userSchema.methods.tieneRol = function(rolVerificar) {
+  return this.rol === rolVerificar;
+};
+
 module.exports = mongoose.model('User', userSchema);
+
